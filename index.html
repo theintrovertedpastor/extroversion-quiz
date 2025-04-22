@@ -5,181 +5,170 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Extroversion Quiz</title>
   <style>
-    .quiz-container {
-      background-color: #ffffff;
-      color: #222;
-      font-family: "Libre Baskerville", serif;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 800px;
-      margin: 2rem auto;
-    }
-
-    .quiz-container h2 {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: #222;
-    }
-
-    .quiz-container p.description {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .quiz-container p.scale-description {
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      color: #555;
-    }
-
-    .question {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    .question p {
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-      font-weight: 500;
-    }
-
-    .options {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .options label {
-      flex: 1;
-      text-align: center;
-      cursor: pointer;
-      font-size: 0.9rem;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      padding: 20px;
       color: #333;
+      max-width: 800px;
+      margin: auto;
     }
-
-    .options input[type="radio"] {
-      margin-bottom: 0.25rem;
+    h1 {
+      color: #2c3e50;
     }
-
-    .submit-btn {
-      display: block;
-      margin: 2rem auto 1rem auto;
-      background-color: #333;
+    .question {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #2c3e50;
       color: white;
       border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      border-radius: 4px;
     }
-
-    .submit-btn:hover {
-      background-color: #111;
+    button:hover {
+      background-color: #1a242f;
     }
-
-    #result {
-      font-size: 1.2rem;
+    .result {
+      margin-top: 20px;
       font-weight: bold;
-      margin-top: 1.5rem;
-      text-align: center;
-      color: #006400;
+      font-size: 1.2rem;
+      padding: 15px;
+      background-color: #e8e8e8;
+      border-left: 6px solid #2c3e50;
     }
   </style>
 </head>
 <body>
-  <div class="quiz-container">
-    <h2>Where Do You Land on the Extroversion Spectrum?</h2>
-    <p class="description">The first statement is, "I am someone who..." Rate how much you agree with each description.</p>
-    <p class="scale-description">1 - disagree strongly. 2 - disagree a little. 3 - neutral; no opinion. 4 - agree a little. 5 - agree strongly.</p>
-
-    <form id="big5quiz">
-      <div id="quiz-questions"></div>
-      <button type="submit" class="submit-btn">See Your Results</button>
-    </form>
-
-    <div id="result"></div>
-  </div>
+  <h1>Extroversion Quiz</h1>
+  <form id="quizForm">
+    <div class="question">
+      <label>1. I enjoy being the center of attention.</label><br/>
+      <input type="radio" name="q1" value="5" required> Strongly Agree
+      <input type="radio" name="q1" value="4"> Agree
+      <input type="radio" name="q1" value="3"> Neutral
+      <input type="radio" name="q1" value="2"> Disagree
+      <input type="radio" name="q1" value="1"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>2. I feel drained after social interactions.</label><br/>
+      <input type="radio" name="q2" value="1" required> Strongly Agree
+      <input type="radio" name="q2" value="2"> Agree
+      <input type="radio" name="q2" value="3"> Neutral
+      <input type="radio" name="q2" value="4"> Disagree
+      <input type="radio" name="q2" value="5"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>3. I prefer deep one-on-one conversations over group activities.</label><br/>
+      <input type="radio" name="q3" value="1" required> Strongly Agree
+      <input type="radio" name="q3" value="2"> Agree
+      <input type="radio" name="q3" value="3"> Neutral
+      <input type="radio" name="q3" value="4"> Disagree
+      <input type="radio" name="q3" value="5"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>4. I find large crowds energizing.</label><br/>
+      <input type="radio" name="q4" value="5" required> Strongly Agree
+      <input type="radio" name="q4" value="4"> Agree
+      <input type="radio" name="q4" value="3"> Neutral
+      <input type="radio" name="q4" value="2"> Disagree
+      <input type="radio" name="q4" value="1"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>5. I usually think before I speak.</label><br/>
+      <input type="radio" name="q5" value="1" required> Strongly Agree
+      <input type="radio" name="q5" value="2"> Agree
+      <input type="radio" name="q5" value="3"> Neutral
+      <input type="radio" name="q5" value="4"> Disagree
+      <input type="radio" name="q5" value="5"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>6. I enjoy meeting new people.</label><br/>
+      <input type="radio" name="q6" value="5" required> Strongly Agree
+      <input type="radio" name="q6" value="4"> Agree
+      <input type="radio" name="q6" value="3"> Neutral
+      <input type="radio" name="q6" value="2"> Disagree
+      <input type="radio" name="q6" value="1"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>7. I prefer staying home rather than going out.</label><br/>
+      <input type="radio" name="q7" value="1" required> Strongly Agree
+      <input type="radio" name="q7" value="2"> Agree
+      <input type="radio" name="q7" value="3"> Neutral
+      <input type="radio" name="q7" value="4"> Disagree
+      <input type="radio" name="q7" value="5"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>8. I enjoy public speaking.</label><br/>
+      <input type="radio" name="q8" value="5" required> Strongly Agree
+      <input type="radio" name="q8" value="4"> Agree
+      <input type="radio" name="q8" value="3"> Neutral
+      <input type="radio" name="q8" value="2"> Disagree
+      <input type="radio" name="q8" value="1"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>9. I feel overwhelmed by too much stimulation.</label><br/>
+      <input type="radio" name="q9" value="1" required> Strongly Agree
+      <input type="radio" name="q9" value="2"> Agree
+      <input type="radio" name="q9" value="3"> Neutral
+      <input type="radio" name="q9" value="4"> Disagree
+      <input type="radio" name="q9" value="5"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>10. I enjoy team projects and brainstorming sessions.</label><br/>
+      <input type="radio" name="q10" value="5" required> Strongly Agree
+      <input type="radio" name="q10" value="4"> Agree
+      <input type="radio" name="q10" value="3"> Neutral
+      <input type="radio" name="q10" value="2"> Disagree
+      <input type="radio" name="q10" value="1"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>11. I prefer listening over talking.</label><br/>
+      <input type="radio" name="q11" value="1" required> Strongly Agree
+      <input type="radio" name="q11" value="2"> Agree
+      <input type="radio" name="q11" value="3"> Neutral
+      <input type="radio" name="q11" value="4"> Disagree
+      <input type="radio" name="q11" value="5"> Strongly Disagree
+    </div>
+    <div class="question">
+      <label>12. I’m energized by spending time alone.</label><br/>
+      <input type="radio" name="q12" value="1" required> Strongly Agree
+      <input type="radio" name="q12" value="2"> Agree
+      <input type="radio" name="q12" value="3"> Neutral
+      <input type="radio" name="q12" value="4"> Disagree
+      <input type="radio" name="q12" value="5"> Strongly Disagree
+    </div>
+    <button type="submit">Get My Results</button>
+  </form>
+  <div id="result" class="result" style="display:none;"></div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const questions = [
-        { text: "is outgoing, sociable.", reverse: false },
-        { text: "has an assertive personality.", reverse: false },
-        { text: "rarely feels excited or eager.", reverse: true },
-        { text: "tends to be quiet.", reverse: true },
-        { text: "is dominant, acts as a leader.", reverse: false },
-        { text: "is less active than other people.", reverse: true },
-        { text: "is sometimes shy, introverted.", reverse: true },
-        { text: "finds it hard to influence people.", reverse: true },
-        { text: "is full of energy.", reverse: false },
-        { text: "laughs easily.", reverse: false },
-        { text: "enjoys being the center of attention.", reverse: false },
-        { text: "avoids large gatherings whenever possible.", reverse: true }
-      ];
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      let score = 0;
+      for (let value of formData.values()) {
+        score += parseInt(value);
+      }
 
-      const quizContainer = document.getElementById("quiz-questions");
+      let resultText = "";
+      if (score <= 24) {
+        resultText = "You are a Strong Introvert!";
+      } else if (score <= 31) {
+        resultText = "You are a Moderate Introvert.";
+      } else if (score <= 36) {
+        resultText = "You are an Ambivert – balanced and flexible.";
+      } else if (score <= 43) {
+        resultText = "You are a Moderate Extrovert.";
+      } else {
+        resultText = "You are a Strong Extrovert!";
+      }
 
-      questions.forEach((q, index) => {
-        const questionDiv = document.createElement("div");
-        questionDiv.className = "question";
-        questionDiv.dataset.reverse = q.reverse;
-        const qNumber = index + 1;
-
-        questionDiv.innerHTML = `
-          <p>${qNumber}. ${q.text}</p>
-          <div class="options">
-            ${[1, 2, 3, 4, 5].map(num => `
-              <label><input type="radio" name="q${qNumber}" value="${num}"> ${num}</label>
-            `).join('')}
-          </div>
-        `;
-
-        quizContainer.appendChild(questionDiv);
-      });
-
-      const form = document.getElementById("big5quiz");
-      const result = document.getElementById("result");
-
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const answers = new FormData(form);
-        let total = 0;
-        let count = 0;
-        questions.forEach((q, i) => {
-          const val = parseInt(answers.get(`q${i + 1}`), 10);
-          if (!isNaN(val)) {
-            total += q.reverse ? (6 - val) : val;
-            count++;
-          }
-        });
-
-        if (count < questions.length) {
-          result.textContent = "Please answer all questions before submitting.";
-          result.style.color = "#b00020";
-          return;
-        }
-
-        const avg = total / count;
-        let feedback = "";
-
-        if (avg >= 4.5) {
-          feedback = "You're an enthusiastic extrovert! You thrive in social situations.";
-        } else if (avg >= 3.5) {
-          feedback = "You're moderately extroverted. You enjoy social time, but also value your space.";
-        } else if (avg >= 2.5) {
-          feedback = "You're balanced on the spectrum, possibly an ambivert.";
-        } else if (avg >= 1.5) {
-          feedback = "You're more on the introverted side. Social settings may drain you.";
-        } else {
-          feedback = "You're a deep introvert, most at home in quiet, reflective spaces.";
-        }
-
-        result.textContent = feedback;
-        result.style.color = "#006400";
-      });
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
+      resultDiv.innerText = `Your score is ${score}. ${resultText}`;
     });
   </script>
 </body>
