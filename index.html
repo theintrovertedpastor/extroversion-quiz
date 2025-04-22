@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,80 +104,82 @@
   </div>
 
   <script>
-    const questions = [
-      { text: "is outgoing, sociable.", reverse: false },
-      { text: "has an assertive personality.", reverse: false },
-      { text: "rarely feels excited or eager.", reverse: true },
-      { text: "tends to be quiet.", reverse: true },
-      { text: "is dominant, acts as a leader.", reverse: false },
-      { text: "is less active than other people.", reverse: true },
-      { text: "is sometimes shy, introverted.", reverse: true },
-      { text: "finds it hard to influence people.", reverse: true },
-      { text: "is full of energy.", reverse: false },
-      { text: "laughs easily.", reverse: false },
-      { text: "enjoys being the center of attention.", reverse: false },
-      { text: "avoids large gatherings whenever possible.", reverse: true }
-    ];
+    document.addEventListener("DOMContentLoaded", function() {
+      const questions = [
+        { text: "is outgoing, sociable.", reverse: false },
+        { text: "has an assertive personality.", reverse: false },
+        { text: "rarely feels excited or eager.", reverse: true },
+        { text: "tends to be quiet.", reverse: true },
+        { text: "is dominant, acts as a leader.", reverse: false },
+        { text: "is less active than other people.", reverse: true },
+        { text: "is sometimes shy, introverted.", reverse: true },
+        { text: "finds it hard to influence people.", reverse: true },
+        { text: "is full of energy.", reverse: false },
+        { text: "laughs easily.", reverse: false },
+        { text: "enjoys being the center of attention.", reverse: false },
+        { text: "avoids large gatherings whenever possible.", reverse: true }
+      ];
 
-    const quizContainer = document.getElementById("quiz-questions");
+      const quizContainer = document.getElementById("quiz-questions");
 
-    questions.forEach((q, index) => {
-      const questionDiv = document.createElement("div");
-      questionDiv.className = "question";
-      questionDiv.dataset.reverse = q.reverse;
-      const qNumber = index + 1;
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+        questionDiv.dataset.reverse = q.reverse;
+        const qNumber = index + 1;
 
-      questionDiv.innerHTML = \`
-        <p>\${qNumber}. \${q.text}</p>
-        <div class="options">
-          \${[1, 2, 3, 4, 5].map(num => \`
-            <label><input type="radio" name="q\${qNumber}" value="\${num}"> \${num}</label>
-          \`).join('')}
-        </div>
-      \`;
+        questionDiv.innerHTML = `
+          <p>${qNumber}. ${q.text}</p>
+          <div class="options">
+            ${[1, 2, 3, 4, 5].map(num => `
+              <label><input type="radio" name="q${qNumber}" value="${num}"> ${num}</label>
+            `).join('')}
+          </div>
+        `;
 
-      quizContainer.appendChild(questionDiv);
-    });
-
-    const form = document.getElementById("big5quiz");
-    const result = document.getElementById("result");
-
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const answers = new FormData(form);
-      let total = 0;
-      let count = 0;
-      questions.forEach((q, i) => {
-        const val = parseInt(answers.get(\`q\${i + 1}\`), 10);
-        if (!isNaN(val)) {
-          total += q.reverse ? (6 - val) : val;
-          count++;
-        }
+        quizContainer.appendChild(questionDiv);
       });
 
-      if (count < questions.length) {
-        result.textContent = "Please answer all questions before submitting.";
-        result.style.color = "#b00020";
-        return;
-      }
+      const form = document.getElementById("big5quiz");
+      const result = document.getElementById("result");
 
-      const avg = total / count;
-      let feedback = "";
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const answers = new FormData(form);
+        let total = 0;
+        let count = 0;
+        questions.forEach((q, i) => {
+          const val = parseInt(answers.get(`q${i + 1}`), 10);
+          if (!isNaN(val)) {
+            total += q.reverse ? (6 - val) : val;
+            count++;
+          }
+        });
 
-      if (avg >= 4.5) {
-        feedback = "You're an enthusiastic extrovert! You thrive in social situations.";
-      } else if (avg >= 3.5) {
-        feedback = "You're moderately extroverted. You enjoy social time, but also value your space.";
-      } else if (avg >= 2.5) {
-        feedback = "You're balanced on the spectrum, possibly an ambivert.";
-      } else if (avg >= 1.5) {
-        feedback = "You're more on the introverted side. Social settings may drain you.";
-      } else {
-        feedback = "You're a deep introvert, most at home in quiet, reflective spaces.";
-      }
+        if (count < questions.length) {
+          result.textContent = "Please answer all questions before submitting.";
+          result.style.color = "#b00020";
+          return;
+        }
 
-      result.textContent = feedback;
-      result.style.color = "#006400";
+        const avg = total / count;
+        let feedback = "";
+
+        if (avg >= 4.5) {
+          feedback = "You're an enthusiastic extrovert! You thrive in social situations.";
+        } else if (avg >= 3.5) {
+          feedback = "You're moderately extroverted. You enjoy social time, but also value your space.";
+        } else if (avg >= 2.5) {
+          feedback = "You're balanced on the spectrum, possibly an ambivert.";
+        } else if (avg >= 1.5) {
+          feedback = "You're more on the introverted side. Social settings may drain you.";
+        } else {
+          feedback = "You're a deep introvert, most at home in quiet, reflective spaces.";
+        }
+
+        result.textContent = feedback;
+        result.style.color = "#006400";
+      });
     });
   </script>
 </body>
