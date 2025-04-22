@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Extroversion Quiz</title>
+  <style>
+    .quiz-container {
+      background-color: #ffffff;
+      color: #222;
+      font-family: "Libre Baskerville", serif;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .quiz-container h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    .quiz-container p.description {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-container p.scale-description {
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .question p {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .options label {
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    .options input[type="radio"] {
+      margin-bottom: 0.25rem;
+    }
+
+    .submit-btn {
+      display: block;
+      margin: 2rem auto 1rem auto;
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #111;
+    }
+
+    #result {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      text-align: center;
+      color: #006400;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Where Do You Land on the Extroversion Spectrum?</h2>
+    <p class="description">The first statement is, "I am someone who..." Rate how much you agree with each description.</p>
+    <p class="scale-description">1 - disagree strongly. 2 - disagree a little. 3 - neutral; no opinion. 4 - agree a little. 5 - agree strongly.</p>
+
+    <form id="big5quiz">
+      <div id="quiz-questions"></div>
+      <button type="submit" class="submit-btn">See Your Results</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { text: "is outgoing, sociable.", reverse: false },
+      { text: "has an assertive personality.", reverse: false },
+      { text: "rarely feels excited or eager.", reverse: true },
+      { text: "tends to be quiet.", reverse: true },
+      { text: "is dominant, acts as a leader.", reverse: false },
+      { text: "is less active than other people.", reverse: true },
+      { text: "is sometimes shy, introverted.", reverse: true },
+      { text: "finds it hard to influence people.", reverse: true },
+      { text: "is full of energy.", reverse: false },
+      { text: "laughs easily.", reverse: false },
+      { text: "enjoys being the center of attention.", reverse: false },
+      { text: "avoids large gatherings whenever possible.", reverse: true }
+    ];
+
+    const quizContainer = document.getElementById("quiz-questions");
+
+    questions.forEach((q, index) => {
+      const questionDiv = document.createElement("div");
+      questionDiv.className = "question";
+      questionDiv.dataset.reverse = q.reverse;
+      const qNumber = index + 1;
+
+      questionDiv.innerHTML = \`
+        <p>\${qNumber}. \${q.text}</p>
+        <div class="options">
+          \${[1, 2, 3, 4, 5].map(num => \`
+            <label><input type="radio" name="q\${qNumber}" value="\${num}"> \${num}</label>
+          \`).join('')}
+        </div>
+      \`;
+
+      quizContainer.appendChild(questionDiv);
+    });
+
+    const form = document.getElementById("big5quiz");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const answers = new FormData(form);
+      let total = 0;
+      let count = 0;
+      questions.forEach((q, i) => {
+        const val = parseInt(answers.get(\`q\${i + 1}\`), 10);
+        if (!isNaN(val)) {
+          total += q.reverse ? (6 - val) : val;
+          count++;
+        }
+      });
+
+      if (count < questions.length) {
+        result.textContent = "Please answer all questions before submitting.";
+        result.style.color = "#b00020";
+        return;
+      }
+
+      const avg = total / count;
+      let feedback = "";
+
+      if (avg >= 4.5) {
+        feedback = "You're an enthusiastic extrovert! You thrive in social situations.";
+      } else if (avg >= 3.5) {
+        feedback = "You're moderately extroverted. You enjoy social time, but also value your space.";
+      } else if (avg >= 2.5) {
+        feedback = "You're balanced on the spectrum, possibly an ambivert.";
+      } else if (avg >= 1.5) {
+        feedback = "You're more on the introverted side. Social settings may drain you.";
+      } else {
+        feedback = "You're a deep introvert, most at home in quiet, reflective spaces.";
+      }
+
+      result.textContent = feedback;
+      result.style.color = "#006400";
+    });
+  </script>
+</body>
+</html>
